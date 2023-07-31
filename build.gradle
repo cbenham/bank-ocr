@@ -1,8 +1,9 @@
 plugins {
     id 'application'
+    id 'checkstyle'
 }
 
-defaultTasks 'clean', 'test'
+defaultTasks 'clean', 'checkstyleMain', 'checkstyleTest', 'test'
 
 repositories {
     mavenCentral()
@@ -32,5 +33,20 @@ tasks.named('test') {
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+checkstyle {
+    ignoreFailures = false
+    maxWarnings = 0
+    checkstyleTest {
+        configFile = file('config/checkstyle/checkstyle-test.xml')
+    }
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.required = false
+        html.required = true
     }
 }
