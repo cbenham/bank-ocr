@@ -1,0 +1,36 @@
+plugins {
+    id 'application'
+}
+
+defaultTasks 'clean', 'test'
+
+repositories {
+    mavenCentral()
+}
+
+group = 'io.conrad'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+application {
+    mainClass = 'io.conrad.Application'
+}
+
+dependencies {
+    testImplementation 'org.assertj:assertj-core:3.24.2', 'org.junit.jupiter:junit-jupiter-api:5.0.3'
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.0.3'
+
+    implementation 'com.google.guava:guava:31.1-jre'
+}
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
