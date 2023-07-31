@@ -1,5 +1,7 @@
 package io.conrad;
 
+import io.conrad.account.AccountNumberBuilder;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -20,14 +22,22 @@ public class ApplicationIntegrationTest {
                     _||_||_ |_||_| _||_||_  _|
                     _|  | _||_||_| _|  ||_||_\s""".indent(1);
 
+    private Application application;
+
+    @BeforeEach
+    void setup() {
+        this.application = new Application();
+    }
+
     @Test
     @Disabled
     public void itReadsAndParsesFileContainingAccountNumbers() {
-        var application = new Application();
         var inputReader = new BufferedReader(new StringReader(INPUT));
+        var firstAccountNumber = AccountNumberBuilder.buildFromStringOfCharacters("345882865");
+        var secondAccountNumber = AccountNumberBuilder.buildFromStringOfCharacters("345883462");
 
-        var actualAccountNumbers = application.parseAccountNumbers(inputReader);
+        var actualAccountNumbers = this.application.parseAccountNumbers(inputReader);
 
-        assertThat(actualAccountNumbers).isEqualTo("345882865\n345883462");
+        assertThat(actualAccountNumbers).containsExactly(firstAccountNumber, secondAccountNumber);
     }
 }
