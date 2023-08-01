@@ -1,0 +1,27 @@
+@startuml
+
+hide empty members
+
+class Application {
+    + parseAccountNumbers(Reader reader) : String
+}
+class AccountLinesParser {
+    + parseLines(Reader reader) : List<AccountNumber>
+}
+class AccountNumberFormatter {
+    + format(List<AccountNumber> accountNumbers): String
+}
+class AccountNumberParser {
+    + parseAccountNumber(String entry): AccountNumber
+}
+
+class AccountNumber
+class AccountNumberCharacter
+
+Application --> AccountLinesParser
+Application --> AccountNumberFormatter
+AccountLinesParser --> AccountNumberParser
+
+AccountNumber --> AccountNumberCharacter
+
+@enduml
