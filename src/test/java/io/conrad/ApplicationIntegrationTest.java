@@ -32,7 +32,7 @@ public class ApplicationIntegrationTest {
     @Test
     @Disabled
     public void itReadsAndParsesFileContainingAccountNumbers() {
-        var inputReader = new BufferedReader(new StringReader(INPUT));
+        var inputReader = new StringReader(INPUT);
         var firstAccountNumber = AccountNumberBuilder.buildFromStringOfCharacters("345882865");
         var secondAccountNumber = AccountNumberBuilder.buildFromStringOfCharacters("345883462");
 
