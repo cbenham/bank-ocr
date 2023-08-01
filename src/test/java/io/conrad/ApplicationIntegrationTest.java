@@ -10,15 +10,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ApplicationIntegrationTest {
 
-    private static final String INPUT =
-            """
-                    _     _  _  _  _  _  _  _
-                    _||_||_ |_||_| _||_||_ |_
-                    _|  | _||_||_||_ |_||_| _|
-
-                    _     _  _  _  _     _  _ \s
-                    _||_||_ |_||_| _||_||_  _|
-                    _|  | _||_||_| _|  ||_||_\s""".indent(1);
+    private static final String INPUT = new StringBuilder()
+            .append(" _     _  _  _  _  _  _  _ ").append(System.lineSeparator())
+            .append(" _||_||_ |_||_| _||_||_ |_ ").append(System.lineSeparator())
+            .append(" _|  | _||_||_||_ |_||_| _|").append(System.lineSeparator())
+            .append("                           ").append(System.lineSeparator())
+            .append(" _     _  _  _  _     _  _ ").append(System.lineSeparator())
+            .append(" _||_||_ |_||_| _||_||_  _|").append(System.lineSeparator())
+            .append(" _|  | _||_||_| _|  ||_||_ ").append(System.lineSeparator())
+            .append("                           ").append(System.lineSeparator())
+            .toString();
 
     private Application application;
 
@@ -36,6 +37,6 @@ public class ApplicationIntegrationTest {
 
         var actual = this.application.parseAccountNumbers(inputReader);
 
-        assertThat(actual).isEqualTo("%s%s%s", accountNumberOne, Character.LINE_SEPARATOR, accountNumberTwo);
+        assertThat(actual).isEqualTo("%s%s%s", accountNumberOne, System.lineSeparator(), accountNumberTwo);
     }
 }
