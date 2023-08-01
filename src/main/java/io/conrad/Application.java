@@ -2,6 +2,7 @@ package io.conrad;
 
 import io.conrad.format.AccountNumberFormatter;
 import io.conrad.parsing.AccountLinesParser;
+import io.conrad.parsing.AccountNumberParser;
 
 import java.io.Reader;
 
@@ -11,7 +12,7 @@ public class Application {
     private final AccountNumberFormatter accountNumberFormatter;
 
     public Application() {
-        this(new AccountLinesParser(), new AccountNumberFormatter());
+        this(new AccountLinesParser(new AccountNumberParser()), new AccountNumberFormatter());
     }
 
     public Application(AccountLinesParser accountLinesParser, AccountNumberFormatter accountNumberFormatter) {
