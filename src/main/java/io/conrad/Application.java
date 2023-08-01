@@ -1,26 +1,27 @@
 package io.conrad;
 
-import io.conrad.account.AccountNumber;
+import io.conrad.format.AccountNumberFormatter;
 import io.conrad.parsing.AccountLinesParser;
 
 import java.io.Reader;
-import java.util.List;
 
 public class Application {
 
     private final AccountLinesParser accountLinesParser;
+    private final AccountNumberFormatter accountNumberFormatter;
 
     public Application() {
-        this(new AccountLinesParser());
+        this(new AccountLinesParser(), new AccountNumberFormatter());
     }
 
-    public Application(AccountLinesParser accountLinesParser) {
-
+    public Application(AccountLinesParser accountLinesParser, AccountNumberFormatter accountNumberFormatter) {
         this.accountLinesParser = accountLinesParser;
+        this.accountNumberFormatter = accountNumberFormatter;
     }
 
-    public List<AccountNumber> parseAccountNumbers(Reader reader) {
-        return this.accountLinesParser.parseLines(reader);
+    public String parseAccountNumbers(Reader reader) {
+        var accountNumbers = this.accountLinesParser.parseLines(reader);
+        return this.accountNumberFormatter.format(accountNumbers);
     }
 
     public static void main(String[] args) {

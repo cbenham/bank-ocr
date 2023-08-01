@@ -1,11 +1,9 @@
 package io.conrad;
 
-import io.conrad.account.AccountNumberBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
 import java.io.StringReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,12 +30,12 @@ public class ApplicationIntegrationTest {
     @Test
     @Disabled
     public void itReadsAndParsesFileContainingAccountNumbers() {
+        var accountNumberOne = "345882865";
+        var accountNumberTwo = "345883462";
         var inputReader = new StringReader(INPUT);
-        var firstAccountNumber = AccountNumberBuilder.buildFromStringOfCharacters("345882865");
-        var secondAccountNumber = AccountNumberBuilder.buildFromStringOfCharacters("345883462");
 
-        var actualAccountNumbers = this.application.parseAccountNumbers(inputReader);
+        var actual = this.application.parseAccountNumbers(inputReader);
 
-        assertThat(actualAccountNumbers).containsExactly(firstAccountNumber, secondAccountNumber);
+        assertThat(actual).isEqualTo("%s%s%s", accountNumberOne, Character.LINE_SEPARATOR, accountNumberTwo);
     }
 }
