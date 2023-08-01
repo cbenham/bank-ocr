@@ -5,6 +5,7 @@ import io.conrad.account.AccountNumber;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountLinesParser {
@@ -24,19 +25,23 @@ public class AccountLinesParser {
     }
 
     private String readEntry(BufferedReader bufferedReader) {
-        var buffer = new StringBuilder();
+        var list = new ArrayList<String>();
         for (int lineNumber = 0; lineNumber < LINES_PER_ACCOUNT_NUMBER; lineNumber++) {
-            buffer.append(this.readSingleLine(bufferedReader));
-            buffer.append(System.lineSeparator());
+            list.add(this.readSingleLine(bufferedReader));
         }
-        return buffer.toString();
+        this.discardBlankSeparatorLine(bufferedReader);
+        return String.join("\n", list);
+    }
+
+    private void discardBlankSeparatorLine(BufferedReader bufferedReader) {
+        this.readSingleLine(bufferedReader);
     }
 
     private String readSingleLine(BufferedReader bufferedReader) {
         try {
             return bufferedReader.readLine();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Drive a test for me!", e);
         }
     }
 }

@@ -18,7 +18,9 @@ class AccountLinesParserTest {
     private static final String LINE_ONE = new StringBuilder()
             .append(" _     _  _  _  _  _  _  _ ").append(System.lineSeparator())
             .append(" _||_||_ |_||_| _||_||_ |_ ").append(System.lineSeparator())
-            .append(" _|  | _||_||_||_ |_||_| _|").append(System.lineSeparator()).toString();
+            .append(" _|  | _||_||_||_ |_||_| _|").toString();
+
+    private static final String BLANK_LINE = String.format("%s                           ", System.lineSeparator());
 
     @Mock
     private AccountNumberParser mockAccountNumberParser;
@@ -32,7 +34,7 @@ class AccountLinesParserTest {
 
     @Test
     void itParsesASingleLine() {
-        var reader = new StringReader(LINE_ONE);
+        var reader = new StringReader(LINE_ONE + BLANK_LINE);
         var accountNumber = AccountNumberBuilder.buildFromStringOfCharacters("345882865");
         when(this.mockAccountNumberParser.parseAccountNumber(LINE_ONE)).thenReturn(accountNumber);
 
