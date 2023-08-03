@@ -30,7 +30,7 @@ public class AccountLinesParser {
             list.add(this.readSingleLine(bufferedReader));
         }
         this.discardBlankSeparatorLine(bufferedReader);
-        return String.join("\n", list);
+        return String.join(System.lineSeparator(), list);
     }
 
     private void discardBlankSeparatorLine(BufferedReader bufferedReader) {
